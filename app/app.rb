@@ -23,6 +23,14 @@ class URLShortener < Sinatra::Base
 
   get '/links/:code' do
     @code = params[:code]
+    link = Link.first(code: params[:code])
+    @original_url = link.original_url
     erb :'/links/link'
+  end
+
+  get '/:code' do
+    link = Link.first(code: params[:code])
+    original_url = link.original_url
+    redirect original_url
   end
 end
