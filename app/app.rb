@@ -9,15 +9,20 @@ class URLShortener < Sinatra::Base
     erb :index
   end
 
-  get '/links' do
-    erb :'links/index'
-  end
-
   get '/links/new' do
     erb :'links/new'
   end
 
   post '/links' do
-    redirect '/links'
+    @link = Link.new(original_url: params[:url])
+    @link.generate_code
+    @link.save
+    @code = @link.code
+    redirect "/links/#{@code}"
+  end
+
+  get '/links/:code' do
+    @code = params[:code]
+    erb :'/links/link'
   end
 end
