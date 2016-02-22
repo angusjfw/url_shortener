@@ -1,4 +1,7 @@
 require 'capybara/rspec'
+require File.join(File.dirname(__FILE__), '..', 'app/app.rb')
+
+Capybara.app = URLShortener
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
