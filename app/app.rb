@@ -9,7 +9,15 @@ class URLShortener < Sinatra::Base
     erb :index
   end
 
+  get '/links' do
+    erb :'links/index'
+  end
+
   get '/links/new' do
     erb :'links/new'
+  end
+
+  post '/links' do
+    redirect '/links'
   end
 end
